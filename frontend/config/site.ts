@@ -20,6 +20,10 @@ export const siteConfig = {
       href: "/generator",
     },
     {
+      title: "Slidev Editor",
+      href: "/slidev",
+    },
+    {
       title: "Contributors",
       href: "/contributors",
     },

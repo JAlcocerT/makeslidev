@@ -137,6 +137,112 @@ clean: ## Clean build artifacts and node_modules
 	@cd $(FRONTEND_DIR) && rm -rf .next node_modules
 	@echo "$(GREEN)✓ Project cleaned$(NC)"
 
+# MakeSlidev Commands
+.PHONY: spin-slidev-editor
+spin-slidev-editor: ## 🚀 Start the complete MakeSlidev application (backend + frontend)
+	@echo "$(BLUE)🚀 Starting MakeSlidev - Live Slidev Presentation Editor$(NC)"
+	@echo "$(YELLOW)Setting up MakeSlidev environment...$(NC)"
+	@echo ""
+	@echo "$(BLUE)📋 Requirements Check:$(NC)"
+	@$(MAKE) check-yarn
+	@echo ""
+	@echo "$(BLUE)📦 Installing Dependencies:$(NC)"
+	@echo "$(YELLOW)Installing backend dependencies...$(NC)"
+	@cd $(BACKEND_DIR) && yarn install --silent
+	@echo "$(GREEN)✓ Backend dependencies installed$(NC)"
+	@echo "$(YELLOW)Installing frontend dependencies...$(NC)"
+	@cd $(FRONTEND_DIR) && yarn install --silent
+	@echo "$(GREEN)✓ Frontend dependencies installed$(NC)"
+	@echo ""
+	@echo "$(BLUE)🔧 Environment Setup:$(NC)"
+	@if [ ! -f $(BACKEND_DIR)/.env ]; then \
+		echo "$(YELLOW)Creating backend .env file...$(NC)"; \
+		cp $(BACKEND_DIR)/.env.example $(BACKEND_DIR)/.env; \
+		echo "$(GREEN)✓ Backend .env created$(NC)"; \
+	else \
+		echo "$(GREEN)✓ Backend .env exists$(NC)"; \
+	fi
+	@if [ ! -f $(FRONTEND_DIR)/.env.local ]; then \
+		echo "$(YELLOW)Creating frontend .env.local file...$(NC)"; \
+		echo "NEXT_PUBLIC_BACKEND_URL=http://localhost:$(BACKEND_PORT)" > $(FRONTEND_DIR)/.env.local; \
+		echo "$(GREEN)✓ Frontend .env.local created$(NC)"; \
+	else \
+		echo "$(GREEN)✓ Frontend .env.local exists$(NC)"; \
+	fi
+	@echo ""
+	@echo "$(BLUE)🎯 Starting MakeSlidev Services:$(NC)"
+	@echo "$(YELLOW)Starting backend server on port $(BACKEND_PORT)...$(NC)"
+	@cd $(BACKEND_DIR) && yarn dev > ../backend.log 2>&1 & echo $$! > ../backend.pid
+	@sleep 3
+	@echo "$(GREEN)✓ Backend server started$(NC)"
+	@echo "$(YELLOW)Starting frontend server on port $(FRONTEND_PORT)...$(NC)"
+	@cd $(FRONTEND_DIR) && yarn dev > ../frontend.log 2>&1 & echo $$! > ../frontend.pid
+	@sleep 3
+	@echo "$(GREEN)✓ Frontend server started$(NC)"
+	@echo ""
+	@echo "$(GREEN)🎉 MakeSlidev is now running!$(NC)"
+	@echo ""
+	@echo "$(BLUE)📱 Access your application:$(NC)"
+	@echo "   🌐 Frontend: $(YELLOW)http://localhost:$(FRONTEND_PORT)$(NC)"
+	@echo "   🔗 Slidev Editor: $(YELLOW)http://localhost:$(FRONTEND_PORT)/slidev$(NC)"
+	@echo "   🔧 Backend API: $(YELLOW)http://localhost:$(BACKEND_PORT)$(NC)"
+	@echo "   📚 API Docs: $(YELLOW)http://localhost:$(BACKEND_PORT)/api-docs$(NC)"
+	@echo ""
+	@echo "$(BLUE)🎯 Demo Instructions:$(NC)"
+	@echo "   1. Navigate to $(YELLOW)http://localhost:$(FRONTEND_PORT)/slidev$(NC)"
+	@echo "   2. Click $(YELLOW)'Edit'$(NC) on Business Pitch template"
+	@echo "   3. Configure slide blocks in accordion interface"
+	@echo "   4. See live preview panel"
+	@echo ""
+	@echo "$(BLUE)🛑 To stop MakeSlidev:$(NC)"
+	@echo "   Run: $(YELLOW)make stop-slidev-editor$(NC)"
+	@echo ""
+	@echo "$(GREEN)Happy presenting! 🚀$(NC)"
+
+.PHONY: stop-slidev-editor
+stop-slidev-editor: ## 🛑 Stop the MakeSlidev application
+	@echo "$(BLUE)🛑 Stopping MakeSlidev...$(NC)"
+	@if [ -f backend.pid ]; then \
+		echo "$(YELLOW)Stopping backend server...$(NC)"; \
+		kill `cat backend.pid` 2>/dev/null || true; \
+		rm -f backend.pid; \
+		echo "$(GREEN)✓ Backend stopped$(NC)"; \
+	else \
+		echo "$(YELLOW)Backend not running$(NC)"; \
+	fi
+	@if [ -f frontend.pid ]; then \
+		echo "$(YELLOW)Stopping frontend server...$(NC)"; \
+		kill `cat frontend.pid` 2>/dev/null || true; \
+		rm -f frontend.pid; \
+		echo "$(GREEN)✓ Frontend stopped$(NC)"; \
+	else \
+		echo "$(YELLOW)Frontend not running$(NC)"; \
+	fi
+	@rm -f backend.log frontend.log
+	@echo "$(GREEN)✓ MakeSlidev stopped$(NC)"
+
+.PHONY: status-slidev-editor
+status-slidev-editor: ## 📊 Check MakeSlidev application status
+	@echo "$(BLUE)📊 MakeSlidev Status:$(NC)"
+	@if [ -f backend.pid ] && kill -0 `cat backend.pid` 2>/dev/null; then \
+		echo "   Backend: $(GREEN)✓ Running$(NC) (PID: `cat backend.pid`)"; \
+	else \
+		echo "   Backend: $(RED)✗ Not running$(NC)"; \
+	fi
+	@if [ -f frontend.pid ] && kill -0 `cat frontend.pid` 2>/dev/null; then \
+		echo "   Frontend: $(GREEN)✓ Running$(NC) (PID: `cat frontend.pid`)"; \
+	else \
+		echo "   Frontend: $(RED)✗ Not running$(NC)"; \
+	fi
+	@echo ""
+	@if [ -f backend.pid ] && kill -0 `cat backend.pid` 2>/dev/null && [ -f frontend.pid ] && kill -0 `cat frontend.pid` 2>/dev/null; then \
+		echo "$(GREEN)🎉 MakeSlidev is fully operational!$(NC)"; \
+		echo "   🔗 Access: $(YELLOW)http://localhost:$(FRONTEND_PORT)/slidev$(NC)"; \
+	else \
+		echo "$(YELLOW)⚠️  MakeSlidev is not fully running$(NC)"; \
+		echo "   Run: $(YELLOW)make spin-slidev-editor$(NC) to start"; \
+	fi
+
 .PHONY: swagger
 swagger: ## Generate Swagger documentation for backend
 	@echo "$(BLUE)Generating Swagger documentation...$(NC)"
