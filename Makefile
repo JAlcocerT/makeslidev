@@ -48,8 +48,14 @@ setup-env: ## Set up environment files from example files
 	fi
 	@echo "$(YELLOW)Note: Make sure to update the BASE parameter in frontend/api/generated/readMeGenerator.ts to point to your backend API (http://localhost:$(BACKEND_PORT)/api)$(NC)"
 
+.PHONY: build-contentlayer
+build-contentlayer: ## Build contentlayer generated files for frontend
+	@echo "$(BLUE)Building contentlayer files...$(NC)"
+	@cd $(FRONTEND_DIR) && npx contentlayer2 build
+	@echo "$(GREEN)✓ Contentlayer files generated$(NC)"
+
 .PHONY: setup
-setup: install setup-env ## Complete project setup (install dependencies and setup environment)
+setup: install setup-env build-contentlayer ## Complete project setup (install dependencies, setup environment, and build contentlayer)
 	@echo "$(GREEN)✓ Project setup complete!$(NC)"
 	@echo "$(BLUE)Next steps:$(NC)"
 	@echo "  1. Update frontend/api/generated/readMeGenerator.ts BASE parameter if needed"

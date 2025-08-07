@@ -1,4 +1,15 @@
 
+**Forked from** https://github.com/ShaanCoding/makeread.me
+
+```sh
+make setup
+make dev
+#make stop
+```
+
+**Combined with** https://github.com/JAlcocerT/slidev
+
+
 ---
 
 <br/>
