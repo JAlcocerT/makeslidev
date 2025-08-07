@@ -38,6 +38,25 @@ Transform makeread.me into a live Slidev presentation editor with real-time prev
   - ✅ Professional UI with tabs and cards
   - ✅ **FIRST DEMO READY!**
 
+```sh
+make spin-slidev-editor
+#make stop-slidev-editor
+
+nohup yarn dev > backend.log 2>&1 &
+```
+or
+```sh
+chmod +x start-makeslidev.sh
+./start-makeslidev.sh
+```
+
+
+or
+
+```sh
+make dev-backend
+make dev-frontend
+```
 ### ⏳ **Pending**
 - **Phase 4**: Template System (Week 5)
 - **Phase 5**: Live Preview Integration (Week 6)

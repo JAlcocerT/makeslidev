@@ -263,3 +263,37 @@ stop: ## Stop any processes running on the default ports
 	@lsof -ti:$(BACKEND_PORT) | xargs kill -9 2>/dev/null || echo "No backend processes to stop"
 	@lsof -ti:$(FRONTEND_PORT) | xargs kill -9 2>/dev/null || echo "No frontend processes to stop"
 	@echo "$(GREEN)✓ Processes stopped$(NC)"
+
+# Docker Production Commands
+.PHONY: docker-build docker-up docker-down docker-restart docker-logs docker-status docker-clean
+docker-build: ## 🐳 Build Docker images for production
+	@echo "$(BLUE)🐳 Building MakeSlidev Docker images...$(NC)"
+	@./docker-makeslidev.sh build
+
+docker-up: ## 🚀 Start MakeSlidev in Docker (production mode)
+	@echo "$(BLUE)🚀 Starting MakeSlidev with Docker...$(NC)"
+	@./docker-makeslidev.sh up
+
+docker-down: ## 🛑 Stop MakeSlidev Docker containers
+	@echo "$(BLUE)🛑 Stopping MakeSlidev Docker containers...$(NC)"
+	@./docker-makeslidev.sh down
+
+docker-restart: ## 🔄 Restart MakeSlidev Docker containers
+	@./docker-makeslidev.sh restart
+
+docker-logs: ## 📋 Show Docker container logs
+	@./docker-makeslidev.sh logs
+
+docker-status: ## 📊 Check Docker container status
+	@./docker-makeslidev.sh status
+
+docker-clean: ## 🧹 Clean up Docker containers and volumes
+	@./docker-makeslidev.sh clean
+
+.PHONY: docker-deploy
+docker-deploy: ## 📦 Full Docker deployment (build + up)
+	@echo "$(BLUE)📦 Deploying MakeSlidev with Docker...$(NC)"
+	@$(MAKE) docker-build
+	@$(MAKE) docker-up
+	@echo "$(GREEN)🎉 MakeSlidev deployed successfully!$(NC)"
+	@echo "$(YELLOW)Access your application at: http://localhost:3000/slidev$(NC)"
