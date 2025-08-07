@@ -180,5 +180,140 @@
         "description": "What you want the audience to do next"
       }
     ]
+  },
+  "tractionMacro": {
+    "id": "tractionMacro",
+    "function": "tractionMacro",
+    "label": "Traction & Milestones",
+    "description": "Show your progress and key achievements",
+    "variables": [
+      {
+        "label": "User Count",
+        "name": "userCount",
+        "_type": "input",
+        "description": "Number of active users or customers"
+      },
+      {
+        "label": "Revenue Growth",
+        "name": "revenueGrowth",
+        "_type": "input",
+        "description": "Revenue growth percentage"
+      },
+      {
+        "label": "Customer Satisfaction",
+        "name": "customerSatisfaction",
+        "_type": "input",
+        "description": "Customer satisfaction score"
+      },
+      {
+        "label": "Key Milestones",
+        "name": "keyMilestones",
+        "_type": "list",
+        "description": "Major achievements and milestones"
+      },
+      {
+        "label": "Next Goals",
+        "name": "nextGoals",
+        "_type": "list",
+        "description": "Goals for the next 6 months"
+      }
+    ]
+  },
+  "competitorAnalysisMacro": {
+    "id": "competitorAnalysisMacro",
+    "function": "competitorAnalysisMacro",
+    "label": "Competitor Analysis",
+    "description": "Analyze competitors and show your advantages",
+    "variables": [
+      {
+        "label": "Competitors",
+        "name": "competitors",
+        "_type": "list",
+        "description": "List of key competitors and their strengths"
+      },
+      {
+        "label": "Our Advantages",
+        "name": "ourAdvantages",
+        "_type": "list",
+        "description": "Your competitive advantages"
+      },
+      {
+        "label": "Competitive Moat",
+        "name": "competitiveMoat",
+        "_type": "textarea",
+        "description": "Your unique positioning and defensible advantages"
+      }
+    ]
+  },
+  "financialProjectionsMacro": {
+    "id": "financialProjectionsMacro",
+    "function": "financialProjectionsMacro",
+    "label": "Financial Projections",
+    "description": "Revenue forecasts and funding requirements",
+    "variables": [
+      {
+        "label": "Revenue Projections",
+        "name": "revenueProjections",
+        "_type": "list",
+        "description": "Year-by-year revenue projections"
+      },
+      {
+        "label": "Funding Amount",
+        "name": "fundingAmount",
+        "_type": "input",
+        "description": "Amount of funding needed"
+      },
+      {
+        "label": "Funding Type",
+        "name": "fundingType",
+        "_type": "select",
+        "options": ["Pre-Seed", "Seed", "Series A", "Series B", "Series C"],
+        "description": "Type of funding round"
+      },
+      {
+        "label": "Use of Funds",
+        "name": "useOfFunds",
+        "_type": "list",
+        "description": "How the funding will be used"
+      }
+    ]
+  },
+  "goToMarketMacro": {
+    "id": "goToMarketMacro",
+    "function": "goToMarketMacro",
+    "label": "Go-to-Market Strategy",
+    "description": "Customer acquisition and growth strategy",
+    "variables": [
+      {
+        "label": "Target Segments",
+        "name": "targetSegments",
+        "_type": "list",
+        "description": "Customer segments you're targeting"
+      },
+      {
+        "label": "Acquisition Channels",
+        "name": "acquisitionChannels",
+        "_type": "list",
+        "description": "How you'll acquire customers"
+      },
+      {
+        "label": "Launch Phases",
+        "name": "launchPhases",
+        "_type": "list",
+        "description": "Phases of your go-to-market strategy"
+      },
+      {
+        "label": "Customer Acquisition Cost",
+        "name": "customerAcquisitionCost",
+        "_type": "input",
+        "description": "Cost to acquire each customer"
+      },
+      {
+        "label": "Customer Lifetime Value",
+        "name": "lifetimeValue",
+        "_type": "input",
+        "description": "Expected lifetime value per customer"
+      }
+    ]
   }
 }

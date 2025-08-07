@@ -1,0 +1,35 @@
+---
+layout: cover
+background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+---
+
+# {{ productName || "Your Product Name" }}
+## {{ productTagline || "Revolutionizing the way you work" }}
+
+<div class="grid grid-cols-2 gap-8 mt-12">
+  <div>
+    <h3 class="text-xl font-bold mb-4 text-white">🚀 Key Features</h3>
+    <div class="space-y-3">
+      {% for feature in keyFeatures %}
+      <div class="flex items-center text-white">
+        <span class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></span>
+        <span>{{ feature }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+  <div class="flex items-center justify-center">
+    {% if productScreenshot %}
+    <img src="{{ productScreenshot }}" alt="Product Screenshot" class="rounded-lg shadow-2xl max-w-full h-auto">
+    {% else %}
+    <div class="w-80 h-48 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
+      <span class="text-white text-lg">Product Demo</span>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="absolute bottom-8 left-8">
+  <div class="text-white text-sm opacity-75">Product Demo Presentation</div>
+</div>

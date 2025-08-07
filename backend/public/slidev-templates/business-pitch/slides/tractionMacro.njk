@@ -1,0 +1,63 @@
+---
+layout: default
+---
+
+# Traction & Milestones
+## {{ tractionTitle || "Proven Market Validation" }}
+
+<div class="grid grid-cols-3 gap-6 mt-8">
+  <div class="text-center">
+    <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-lg">
+      <h3 class="text-3xl font-bold">{{ userCount || "10K+" }}</h3>
+      <p class="text-sm opacity-90">{{ userMetric || "Active Users" }}</p>
+    </div>
+  </div>
+  
+  <div class="text-center">
+    <div class="bg-gradient-to-r from-green-500 to-teal-600 text-white p-6 rounded-lg">
+      <h3 class="text-3xl font-bold">{{ revenueGrowth || "300%" }}</h3>
+      <p class="text-sm opacity-90">{{ revenueMetric || "Revenue Growth" }}</p>
+    </div>
+  </div>
+  
+  <div class="text-center">
+    <div class="bg-gradient-to-r from-orange-500 to-red-600 text-white p-6 rounded-lg">
+      <h3 class="text-3xl font-bold">{{ customerSatisfaction || "4.8/5" }}</h3>
+      <p class="text-sm opacity-90">{{ satisfactionMetric || "Customer Rating" }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="mt-8">
+  <h3 class="text-xl font-bold mb-4">🚀 Key Milestones</h3>
+  <div class="space-y-4">
+    {% for milestone in keyMilestones %}
+    <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+      <div class="w-4 h-4 bg-green-500 rounded-full mr-4 flex-shrink-0"></div>
+      <div class="flex-grow">
+        <h4 class="font-semibold">{{ milestone.title }}</h4>
+        <p class="text-sm text-gray-600">{{ milestone.description }}</p>
+      </div>
+      <div class="text-sm text-gray-500 ml-4">
+        {{ milestone.date }}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="mt-6 p-4 bg-yellow-50 rounded-lg">
+  <h4 class="font-semibold text-yellow-800 mb-2">🎯 Next 6 Months</h4>
+  <div class="grid grid-cols-2 gap-4 text-sm">
+    {% for goal in nextGoals %}
+    <div class="flex items-center">
+      <span class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
+      <span>{{ goal }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="absolute bottom-4 left-4 text-xs text-gray-500">
+  {{ slideNumber || "6" }} / {{ totalSlides || "10" }}
+</div>

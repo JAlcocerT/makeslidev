@@ -1,0 +1,63 @@
+---
+layout: default
+---
+
+# Live Demo
+## {{ demoTitle || "See it in action" }}
+
+<div class="grid grid-cols-3 gap-6 mt-8">
+  <div class="col-span-2">
+    <div class="bg-gray-900 rounded-lg p-6 h-96 flex items-center justify-center">
+      {% if demoUrl %}
+      <iframe src="{{ demoUrl }}" class="w-full h-full rounded" frameborder="0"></iframe>
+      {% else %}
+      <div class="text-center text-white">
+        <div class="text-6xl mb-4">🎬</div>
+        <h3 class="text-xl font-bold mb-2">Live Demo</h3>
+        <p class="text-gray-300">Interactive product demonstration</p>
+      </div>
+      {% endif %}
+    </div>
+    
+    <div class="mt-4 flex justify-center space-x-4">
+      <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition">
+        ▶️ Start Demo
+      </button>
+      <button class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition">
+        🔄 Reset
+      </button>
+    </div>
+  </div>
+  
+  <div>
+    <h3 class="text-lg font-bold mb-4">📋 Demo Steps</h3>
+    <div class="space-y-3">
+      {% for step in demoSteps %}
+      <div class="flex items-start p-3 bg-blue-50 rounded-lg">
+        <div class="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5">
+          {{ loop.index }}
+        </div>
+        <div class="flex-1">
+          <p class="text-sm">{{ step }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    
+    <div class="mt-6 p-4 bg-yellow-50 rounded-lg">
+      <h4 class="font-semibold text-yellow-800 mb-2">💡 Key Highlights</h4>
+      <div class="space-y-2">
+        {% for highlight in keyHighlights %}
+        <div class="flex items-center text-sm">
+          <span class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
+          <span>{{ highlight }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="absolute bottom-4 left-4 text-xs text-gray-500">
+  {{ slideNumber || "3" }} / {{ totalSlides || "6" }}
+</div>

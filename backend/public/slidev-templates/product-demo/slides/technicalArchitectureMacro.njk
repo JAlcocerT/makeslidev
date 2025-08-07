@@ -1,0 +1,78 @@
+---
+layout: default
+---
+
+# Technical Architecture
+## {{ architectureTitle || "Built for Scale & Performance" }}
+
+<div class="grid grid-cols-2 gap-8 mt-6">
+  <div>
+    <h3 class="text-xl font-bold mb-4">🛠️ Tech Stack</h3>
+    <div class="grid grid-cols-2 gap-3">
+      {% for tech in techStack %}
+      <div class="p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg text-center">
+        <div class="font-semibold text-blue-800">{{ tech.name || tech }}</div>
+        {% if tech.version %}
+        <div class="text-xs text-blue-600">{{ tech.version }}</div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    
+    <div class="mt-6">
+      <h4 class="font-semibold mb-3">⚡ Key Benefits</h4>
+      <div class="space-y-2">
+        {% for benefit in keyBenefits %}
+        <div class="flex items-center p-2 bg-green-50 rounded">
+          <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+          <span class="text-sm">{{ benefit }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  
+  <div>
+    <h3 class="text-xl font-bold mb-4">🏗️ Architecture</h3>
+    {% if architectureDiagram %}
+    <img src="{{ architectureDiagram }}" alt="Architecture Diagram" class="w-full rounded-lg shadow-lg">
+    {% else %}
+    <div class="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+      <div class="text-center text-gray-500">
+        <div class="text-4xl mb-2">🏗️</div>
+        <p>Architecture Diagram</p>
+      </div>
+    </div>
+    {% endif %}
+    
+    <div class="mt-4 p-4 bg-purple-50 rounded-lg">
+      <h4 class="font-semibold text-purple-800 mb-2">📈 Scalability</h4>
+      <p class="text-sm text-purple-700">{{ scalability || "Designed to handle millions of users with horizontal scaling capabilities and microservices architecture." }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="mt-8 p-4 bg-gray-50 rounded-lg">
+  <div class="grid grid-cols-4 gap-4 text-center">
+    <div>
+      <div class="text-2xl font-bold text-blue-600">99.9%</div>
+      <div class="text-xs text-gray-600">Uptime</div>
+    </div>
+    <div>
+      <div class="text-2xl font-bold text-green-600">&lt; 100ms</div>
+      <div class="text-xs text-gray-600">Response Time</div>
+    </div>
+    <div>
+      <div class="text-2xl font-bold text-purple-600">1M+</div>
+      <div class="text-xs text-gray-600">Requests/Day</div>
+    </div>
+    <div>
+      <div class="text-2xl font-bold text-orange-600">24/7</div>
+      <div class="text-xs text-gray-600">Monitoring</div>
+    </div>
+  </div>
+</div>
+
+<div class="absolute bottom-4 left-4 text-xs text-gray-500">
+  {{ slideNumber || "4" }} / {{ totalSlides || "6" }}
+</div>

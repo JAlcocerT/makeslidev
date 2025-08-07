@@ -1,0 +1,46 @@
+---
+layout: default
+---
+
+# Competitor Analysis
+## {{ competitorTitle || "Market Landscape" }}
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+  <div>
+    <h3 class="text-xl font-bold mb-4">🏆 Key Competitors</h3>
+    <div class="space-y-3">
+      {% for competitor in competitors %}
+      <div class="bg-gray-100 p-4 rounded-lg">
+        <h4 class="font-semibold">{{ competitor.name }}</h4>
+        <p class="text-sm text-gray-600">{{ competitor.description }}</p>
+        <div class="flex gap-2 mt-2">
+          {% for strength in competitor.strengths %}
+          <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">{{ strength }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+  <div>
+    <h3 class="text-xl font-bold mb-4">⚡ Our Advantages</h3>
+    <div class="space-y-3">
+      {% for advantage in ourAdvantages %}
+      <div class="bg-green-100 p-4 rounded-lg">
+        <h4 class="font-semibold text-green-800">{{ advantage.title }}</h4>
+        <p class="text-sm text-green-700">{{ advantage.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    
+    <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+      <h4 class="font-semibold text-blue-800">🎯 Competitive Moat</h4>
+      <p class="text-sm text-blue-700 mt-2">{{ competitiveMoat || "Our unique positioning and defensible advantages" }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="absolute bottom-4 left-4 text-xs text-gray-500">
+  {{ slideNumber || "5" }} / {{ totalSlides || "10" }}
+</div>

@@ -1,0 +1,84 @@
+---
+layout: default
+---
+
+# Go-to-Market Strategy
+## {{ gtmTitle || "Customer Acquisition & Growth" }}
+
+<div class="grid grid-cols-2 gap-8 mt-6">
+  <div>
+    <h3 class="text-xl font-bold mb-4">🎯 Target Segments</h3>
+    <div class="space-y-4">
+      {% for segment in targetSegments %}
+      <div class="p-4 border-l-4 border-blue-500 bg-blue-50">
+        <h4 class="font-semibold text-blue-800">{{ segment.name }}</h4>
+        <p class="text-sm text-blue-700 mt-1">{{ segment.description }}</p>
+        <div class="flex gap-2 mt-2">
+          <span class="bg-blue-200 text-blue-800 px-2 py-1 rounded text-xs">
+            Size: {{ segment.size }}
+          </span>
+          <span class="bg-blue-200 text-blue-800 px-2 py-1 rounded text-xs">
+            CAC: {{ segment.cac }}
+          </span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+  <div>
+    <h3 class="text-xl font-bold mb-4">📈 Acquisition Channels</h3>
+    <div class="space-y-3">
+      {% for channel in acquisitionChannels %}
+      <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+        <div>
+          <h4 class="font-semibold">{{ channel.name }}</h4>
+          <p class="text-sm text-gray-600">{{ channel.description }}</p>
+        </div>
+        <div class="text-right">
+          <div class="text-lg font-bold text-green-600">{{ channel.effectiveness }}</div>
+          <div class="text-xs text-gray-500">effectiveness</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<div class="mt-8">
+  <h3 class="text-xl font-bold mb-4">🚀 Launch Strategy</h3>
+  <div class="grid grid-cols-4 gap-4">
+    {% for phase in launchPhases %}
+    <div class="text-center p-4 bg-gradient-to-b from-gray-50 to-gray-100 rounded-lg">
+      <div class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">
+        {{ loop.index }}
+      </div>
+      <h4 class="font-semibold text-sm mb-2">{{ phase.title }}</h4>
+      <p class="text-xs text-gray-600">{{ phase.description }}</p>
+      <div class="text-xs text-blue-600 mt-2 font-semibold">{{ phase.timeline }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="mt-6 p-4 bg-green-50 rounded-lg">
+  <h4 class="font-semibold text-green-800 mb-2">💡 Key Success Metrics</h4>
+  <div class="grid grid-cols-3 gap-4 text-sm">
+    <div class="text-center">
+      <div class="text-lg font-bold text-green-600">{{ customerAcquisitionCost || "$50" }}</div>
+      <div class="text-xs text-gray-600">Customer Acquisition Cost</div>
+    </div>
+    <div class="text-center">
+      <div class="text-lg font-bold text-green-600">{{ lifetimeValue || "$500" }}</div>
+      <div class="text-xs text-gray-600">Customer Lifetime Value</div>
+    </div>
+    <div class="text-center">
+      <div class="text-lg font-bold text-green-600">{{ paybackPeriod || "3 months" }}</div>
+      <div class="text-xs text-gray-600">Payback Period</div>
+    </div>
+  </div>
+</div>
+
+<div class="absolute bottom-4 left-4 text-xs text-gray-500">
+  {{ slideNumber || "8" }} / {{ totalSlides || "10" }}
+</div>

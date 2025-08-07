@@ -1,0 +1,73 @@
+---
+layout: default
+---
+
+# {{ problemTitle or "Problem Statement" }}
+
+<div class="grid grid-cols-1 gap-8">
+  <div class="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 p-6 rounded-lg border border-red-200 dark:border-red-800">
+    <h2 class="text-2xl font-bold text-red-800 dark:text-red-200 mb-4">
+      <mdi-alert-circle class="inline mr-2" />
+      The Challenge
+    </h2>
+    <p class="text-lg text-red-700 dark:text-red-300 leading-relaxed">
+      {{ problemDescription or "Describe the core problem your product solves..." }}
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
+      <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+        <mdi-emoticon-sad class="inline mr-2 text-orange-500" />
+        Pain Points
+      </h3>
+      <ul class="space-y-2">
+        {% if painPoints %}
+          {% for point in painPoints %}
+            <li class="flex items-start">
+              <mdi-chevron-right class="text-orange-500 mt-1 mr-2 flex-shrink-0" />
+              <span class="text-gray-700 dark:text-gray-300">{{ point }}</span>
+            </li>
+          {% endfor %}
+        {% else %}
+          <li class="text-gray-500 dark:text-gray-400 italic">Add pain points to highlight user frustrations</li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
+      <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+        <mdi-tools class="inline mr-2 text-blue-500" />
+        Current Solutions
+      </h3>
+      <ul class="space-y-2">
+        {% if currentSolutions %}
+          {% for solution in currentSolutions %}
+            <li class="flex items-start">
+              <mdi-chevron-right class="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+              <span class="text-gray-700 dark:text-gray-300">{{ solution }}</span>
+            </li>
+          {% endfor %}
+        {% else %}
+          <li class="text-gray-500 dark:text-gray-400 italic">List existing solutions and their limitations</li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style>
+.slidev-layout {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.slidev-layout h1 {
+  background: linear-gradient(45deg, #fff, #f0f0f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+</style>

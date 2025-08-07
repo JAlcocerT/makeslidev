@@ -1,0 +1,106 @@
+---
+layout: default
+---
+
+# {{ roadmapTitle or "Product Roadmap" }}
+
+<div class="grid grid-cols-1 gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 p-6 rounded-lg border border-blue-200 dark:border-blue-800">
+      <h2 class="text-2xl font-bold text-blue-800 dark:text-blue-200 mb-6">
+        <mdi-rocket-launch class="inline mr-2" />
+        Upcoming Features
+      </h2>
+      {% if upcomingFeatures %}
+        <div class="space-y-4">
+          {% for feature in upcomingFeatures %}
+            <div class="flex items-start bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-blue-200 dark:border-blue-700">
+              <mdi-star-outline class="text-blue-500 mt-1 mr-3 flex-shrink-0" />
+              <span class="text-blue-700 dark:text-blue-300 font-medium">{{ feature }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="text-blue-600 dark:text-blue-400 italic">Add features planned for future releases</p>
+      {% endif %}
+    </div>
+
+    <div class="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 p-6 rounded-lg border border-green-200 dark:border-green-800">
+      <h2 class="text-2xl font-bold text-green-800 dark:text-green-200 mb-6">
+        <mdi-calendar-clock class="inline mr-2" />
+        Timeline & Milestones
+      </h2>
+      {% if timeline %}
+        <div class="space-y-4">
+          {% for milestone in timeline %}
+            <div class="flex items-start bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-green-200 dark:border-green-700">
+              <mdi-clock-outline class="text-green-500 mt-1 mr-3 flex-shrink-0" />
+              <span class="text-green-700 dark:text-green-300 font-medium">{{ milestone }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="text-green-600 dark:text-green-400 italic">Add release timeline and key milestones</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 p-6 rounded-lg border border-purple-200 dark:border-purple-800">
+    <h2 class="text-2xl font-bold text-purple-800 dark:text-purple-200 mb-6">
+      <mdi-account-group class="inline mr-2" />
+      Community Requests
+    </h2>
+    {% if communityRequests %}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {% for request in communityRequests %}
+          <div class="flex items-start bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-purple-200 dark:border-purple-700">
+            <mdi-heart class="text-purple-500 mt-1 mr-3 flex-shrink-0" />
+            <span class="text-purple-700 dark:text-purple-300 font-medium">{{ request }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-purple-600 dark:text-purple-400 italic">Add features requested by your community</p>
+    {% endif %}
+  </div>
+
+  <div class="text-center bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
+    <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">
+      <mdi-target class="inline mr-2" />
+      Our Vision
+    </h3>
+    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+      Building the future of product experiences through continuous innovation and community-driven development.
+    </p>
+    <div class="flex justify-center items-center space-x-8 mt-6">
+      <div class="text-center">
+        <div class="text-3xl font-bold text-blue-600">Q2 2024</div>
+        <div class="text-gray-600 dark:text-gray-400">Next Major Release</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl font-bold text-green-600">50+</div>
+        <div class="text-gray-600 dark:text-gray-400">Features Planned</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl font-bold text-purple-600">100%</div>
+        <div class="text-gray-600 dark:text-gray-400">Community Driven</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.slidev-layout {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.slidev-layout h1 {
+  background: linear-gradient(45deg, #fff, #f0f0f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+</style>

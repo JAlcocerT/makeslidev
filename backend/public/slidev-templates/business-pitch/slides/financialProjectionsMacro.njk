@@ -1,0 +1,64 @@
+---
+layout: default
+---
+
+# Financial Projections
+## {{ financialTitle || "Revenue & Growth Forecast" }}
+
+<div class="grid grid-cols-2 gap-8 mt-6">
+  <div>
+    <h3 class="text-xl font-bold mb-4">📈 Revenue Projections</h3>
+    <div class="space-y-4">
+      {% for year in revenueProjections %}
+      <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+        <span class="font-semibold">{{ year.year }}</span>
+        <span class="text-2xl font-bold text-green-600">${{ year.revenue }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    
+    <div class="mt-6 p-4 bg-green-50 rounded-lg">
+      <h4 class="font-semibold text-green-800">💰 Key Metrics</h4>
+      <div class="grid grid-cols-2 gap-4 mt-2 text-sm">
+        <div>
+          <span class="text-gray-600">ARR Growth:</span>
+          <span class="font-bold ml-2">{{ arrGrowth || "150%" }}</span>
+        </div>
+        <div>
+          <span class="text-gray-600">Gross Margin:</span>
+          <span class="font-bold ml-2">{{ grossMargin || "85%" }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div>
+    <h3 class="text-xl font-bold mb-4">🎯 Funding Requirements</h3>
+    <div class="space-y-4">
+      <div class="p-4 bg-blue-50 rounded-lg">
+        <h4 class="font-semibold text-blue-800">💵 Funding Round</h4>
+        <p class="text-3xl font-bold text-blue-600 mt-2">${{ fundingAmount || "2.5M" }}</p>
+        <p class="text-sm text-blue-700">{{ fundingType || "Series A" }}</p>
+      </div>
+      
+      <h4 class="font-semibold mb-3">Use of Funds:</h4>
+      <div class="space-y-2">
+        {% for use in useOfFunds %}
+        <div class="flex justify-between items-center">
+          <span class="text-sm">{{ use.category }}</span>
+          <div class="flex items-center">
+            <div class="w-20 h-2 bg-gray-200 rounded mr-2">
+              <div class="h-2 bg-blue-500 rounded" style="width: {{ use.percentage }}%"></div>
+            </div>
+            <span class="text-sm font-semibold">{{ use.percentage }}%</span>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="absolute bottom-4 left-4 text-xs text-gray-500">
+  {{ slideNumber || "7" }} / {{ totalSlides || "10" }}
+</div>
