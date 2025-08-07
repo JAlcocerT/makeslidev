@@ -4,9 +4,10 @@ import { healthCheckRegistry } from '@/api/healthCheck/healthCheck.routes'
 import { templateRegistry } from '@/api/templates/template.routes'
 import { sideBarRegistry } from '@/api/sideBar/sideBar.routes'
 import { contributorRegistry } from '@/api/contributors/contributor.routes'
+import { slidevRegistry } from '@/api/slidev/slidev.routes'
 
 export function generateOpenAPIDocument() {
-    const registry = new OpenAPIRegistry([healthCheckRegistry, templateRegistry, sideBarRegistry, contributorRegistry])
+    const registry = new OpenAPIRegistry([healthCheckRegistry, templateRegistry, sideBarRegistry, contributorRegistry, slidevRegistry])
     const generator = new OpenApiGeneratorV3(registry.definitions)
 
     return generator.generateDocument({

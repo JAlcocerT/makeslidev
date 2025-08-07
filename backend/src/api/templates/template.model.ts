@@ -122,6 +122,7 @@ export const FunctionSchema = z.object({
         z.union([VariableInputSchema, VariableTextAreaSchema, VariableCheckBoxSchema, VariableListSchema, VariableObjectSchema, VariableSelectSchema, VariableRadioSchema])
     ),
     folder: z.string(),
+    order: z.number().optional(),
 })
 
 export type PageType = z.infer<typeof PageTypeSchema>

@@ -17,13 +17,15 @@ Transform makeread.me into a live Slidev presentation editor with real-time prev
   - ✅ Template configuration files (blocks.ts, blocks.json)
   - ✅ Preview markdown file with sample content
 
-### 🚧 **In Progress (Week 2)**
-- **Phase 2**: Backend API Extension - **60% DONE**
+### ✅ **Completed (Week 2)**
+- **Phase 2**: Backend API Extension - **100% DONE**
   - ✅ Slidev controller created with all methods
   - ✅ Slidev routes defined with OpenAPI docs
-  - ⏳ Need to install nunjucks dependency
-  - ⏳ Need to register routes in main app
-  - ⏳ Need to test API endpoints
+  - ✅ Nunjucks dependency installed
+  - ✅ Routes registered in main Express app
+  - ✅ API endpoints tested and working
+  - ✅ OpenAPI documentation updated
+  - ✅ All endpoints accessible via Swagger UI
 
 ### ⏳ **Pending**
 - **Phase 3**: Frontend Components (Week 3-4)
@@ -33,10 +35,13 @@ Transform makeread.me into a live Slidev presentation editor with real-time prev
 - **Phase 7**: Polish & Testing (Week 8)
 
 ### 🎯 **Next Steps**
-1. Install missing dependencies (nunjucks)
-2. Register Slidev routes in main app
-3. Test API endpoints
-4. Start frontend components
+1. ✅ ~~Install missing dependencies (nunjucks)~~
+2. ✅ ~~Register Slidev routes in main app~~
+3. ✅ ~~Test API endpoints~~
+4. **START Phase 3**: Frontend Components
+   - Install socket.io-client for WebSockets
+   - Create Slidev preview component
+   - Implement live editing hooks
 
 ---
 

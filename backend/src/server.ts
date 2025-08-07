@@ -9,6 +9,7 @@ import { healthCheckRouter } from './api/healthCheck/healthCheck.routes'
 import { sideBarRouter } from './api/sideBar/sideBar.routes'
 import { templateController } from './api/templates/template.routes'
 import { contributorController } from './api/contributors/contributor.routes'
+import { slidevRouter } from './api/slidev/slidev.routes'
 import { openAPIRouter } from './api-docs/openAPIRouter'
 import errorHandler from './common/middleware/errorHandler'
 import { PORT } from './common/utils/env'
@@ -32,6 +33,7 @@ app.use('/v1/health-check', healthCheckRouter)
 app.use('/v1/sidebar', sideBarRouter)
 app.use('/v1/template', templateController)
 app.use('/v1/contributor', contributorController)
+app.use('/v1/slidev', slidevRouter)
 
 // Swagger UI
 app.use(openAPIRouter)
