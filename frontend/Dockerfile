@@ -20,11 +20,13 @@ COPY . .
 
 # Set build-time environment variables
 ARG NEXT_PUBLIC_BACKEND_URL
+ARG NEXT_PUBLIC_APP_URL=http://localhost:3000
 ENV NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL
+ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Build the application
-RUN yarn build
+# Build the application (skip contentlayer for now)
+RUN yarn next build
 
 # Production image, copy all the files and run next
 FROM base AS runner

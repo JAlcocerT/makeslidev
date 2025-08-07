@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import fs from 'fs'
 
-if (process.env.NODE_ENV === 'prod') {
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'prod') {
     console.log('Production environment detected, skipping dotenv configuration')
 } else if (fs.existsSync('.env')) {
     dotenv.config({ path: '.env' })
@@ -29,7 +29,7 @@ export enum Environment {
     DEVELOPMENT = 'dev',
 }
 
-export const PRODUCTION_OR_DEVELOPMENT: Environment = NODE_ENV === 'prod' ? Environment.PRODUCTION : Environment.DEVELOPMENT
+export const PRODUCTION_OR_DEVELOPMENT: Environment = (NODE_ENV === 'prod' || NODE_ENV === 'production') ? Environment.PRODUCTION : Environment.DEVELOPMENT
 
 export const PORT = process.env.PORT!
 

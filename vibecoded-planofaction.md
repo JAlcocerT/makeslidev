@@ -50,13 +50,41 @@ chmod +x start-makeslidev.sh
 ./start-makeslidev.sh
 ```
 
-
 or
 
 ```sh
 make dev-backend
 make dev-frontend
 ```
+
+Via container:
+
+```sh
+make docker-deploy
+
+docker compose logs backend --tail=10
+curl -f http://localhost:8080/v1/health-check
+curl -f http://localhost:8080/v1/slidev/templates
+```
+
+```sh
+# Quick deploy (what we just did!)
+make docker-deploy
+
+# Or step by step
+make docker-build
+make docker-up
+
+# Check status
+make docker-status
+
+# View logs
+make docker-logs
+
+# Stop services
+make docker-down
+```
+
 ### ⏳ **Pending**
 - **Phase 4**: Template System (Week 5)
 - **Phase 5**: Live Preview Integration (Week 6)

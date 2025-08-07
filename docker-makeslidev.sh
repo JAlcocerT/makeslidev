@@ -15,7 +15,7 @@ NC='\033[0m' # No Color
 
 # Project info
 PROJECT_NAME="MakeSlidev"
-COMPOSE_FILE="docker-compose.yml"
+COMPOSE_FILE="docker compose.yml"
 
 # Functions
 print_banner() {
@@ -54,8 +54,8 @@ check_docker() {
         exit 1
     fi
     
-    if ! command -v docker-compose &> /dev/null; then
-        echo -e "${RED}❌ Docker Compose is not installed. Please install Docker Compose first.${NC}"
+    if ! docker compose version &> /dev/null; then
+        echo -e "${RED}❌ Docker Compose is not available. Please install Docker Compose first.${NC}"
         exit 1
     fi
     
@@ -67,13 +67,13 @@ check_docker() {
 
 build_images() {
     echo -e "${BLUE}🔨 Building MakeSlidev Docker images...${NC}"
-    docker-compose -f $COMPOSE_FILE build --no-cache
+    docker compose -f $COMPOSE_FILE build --no-cache
     echo -e "${GREEN}✅ Images built successfully!${NC}"
 }
 
 start_services() {
     echo -e "${BLUE}🚀 Starting MakeSlidev services...${NC}"
-    docker-compose -f $COMPOSE_FILE up -d
+    docker compose -f $COMPOSE_FILE up -d
     
     echo -e "${YELLOW}⏳ Waiting for services to be ready...${NC}"
     sleep 10
@@ -84,29 +84,29 @@ start_services() {
 
 stop_services() {
     echo -e "${BLUE}🛑 Stopping MakeSlidev services...${NC}"
-    docker-compose -f $COMPOSE_FILE down
+    docker compose -f $COMPOSE_FILE down
     echo -e "${GREEN}✅ Services stopped successfully!${NC}"
 }
 
 restart_services() {
     echo -e "${BLUE}🔄 Restarting MakeSlidev services...${NC}"
-    docker-compose -f $COMPOSE_FILE restart $1
+    docker compose -f $COMPOSE_FILE restart $1
     echo -e "${GREEN}✅ Services restarted successfully!${NC}"
 }
 
 show_logs() {
     if [ -n "$1" ]; then
         echo -e "${BLUE}📋 Showing logs for $1...${NC}"
-        docker-compose -f $COMPOSE_FILE logs -f $1
+        docker compose -f $COMPOSE_FILE logs -f $1
     else
         echo -e "${BLUE}📋 Showing logs for all services...${NC}"
-        docker-compose -f $COMPOSE_FILE logs -f
+        docker compose -f $COMPOSE_FILE logs -f
     fi
 }
 
 show_status() {
     echo -e "${BLUE}📊 MakeSlidev Service Status:${NC}"
-    docker-compose -f $COMPOSE_FILE ps
+    docker compose -f $COMPOSE_FILE ps
     echo ""
     
     # Check health status
@@ -133,7 +133,7 @@ clean_all() {
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo -e "${BLUE}🧹 Cleaning up MakeSlidev...${NC}"
-        docker-compose -f $COMPOSE_FILE down -v --remove-orphans
+        docker compose -f $COMPOSE_FILE down -v --remove-orphans
         docker system prune -f
         echo -e "${GREEN}✅ Cleanup completed!${NC}"
     else
@@ -143,12 +143,12 @@ clean_all() {
 
 open_shell() {
     echo -e "${BLUE}🐚 Opening shell in backend container...${NC}"
-    docker-compose -f $COMPOSE_FILE exec backend sh
+    docker compose -f $COMPOSE_FILE exec backend sh
 }
 
 open_db_shell() {
     echo -e "${BLUE}🗄️  Opening MongoDB shell...${NC}"
-    docker-compose -f $COMPOSE_FILE exec mongodb mongosh -u admin -p makeslidev123 --authenticationDatabase admin makeslidev
+    docker compose -f $COMPOSE_FILE exec mongodb mongosh -u admin -p makeslidev123 --authenticationDatabase admin makeslidev
 }
 
 show_access_info() {
