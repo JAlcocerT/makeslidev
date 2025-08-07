@@ -107,5 +107,140 @@ export const slidevRouter: Router = (() => {
         }
     })
 
+    // Preview routes
+    const PreviewRequestSchema = CompileSlidevRequestSchema.extend({
+        config: z.object({
+            port: z.number().optional(),
+            host: z.string().optional(),
+            theme: z.string().optional(),
+            remote: z.boolean().optional()
+        }).optional()
+    })
+
+    const PreviewInstanceSchema = z.object({
+        id: z.string(),
+        port: z.number(),
+        status: z.enum(['starting', 'running', 'stopped', 'error']),
+        url: z.string(),
+        templateId: z.string()
+    })
+
+    slidevRegistry.register('PreviewRequest', PreviewRequestSchema)
+    slidevRegistry.register('PreviewInstance', PreviewInstanceSchema)
+
+    // Start Slidev preview
+    slidevRegistry.registerPath({
+        method: 'post',
+        path: '/slidev/preview/start',
+        tags: ['Slidev Preview'],
+        request: {
+            body: {
+                content: {
+                    'application/json': {
+                        schema: PreviewRequestSchema,
+                    },
+                },
+            },
+        },
+        responses: createApiResponse(PreviewInstanceSchema, 'Preview started successfully'),
+    })
+
+    router.post('/preview/start', async (req: Request, res: Response) => {
+        try {
+            const serviceResponse = await slidevController.startSlidevPreview(req.body)
+            return handleServiceResponse(serviceResponse, res)
+        } catch (error) {
+            const errorResponse = new ServiceResponse(ResponseStatus.Failed, 'Failed to start preview', null, 500)
+            return handleServiceResponse(errorResponse, res)
+        }
+    })
+
+    // Update Slidev preview
+    slidevRegistry.registerPath({
+        method: 'put',
+        path: '/slidev/preview/{instanceId}',
+        tags: ['Slidev Preview'],
+        request: {
+            params: z.object({
+                instanceId: z.string()
+            }),
+            body: {
+                content: {
+                    'application/json': {
+                        schema: CompileSlidevRequestSchema,
+                    },
+                },
+            },
+        },
+        responses: createApiResponse(z.boolean(), 'Preview updated successfully'),
+    })
+
+    router.put('/preview/:instanceId', async (req: Request, res: Response) => {
+        try {
+            const { instanceId } = req.params
+            const serviceResponse = await slidevController.updateSlidevPreview(instanceId, req.body)
+            return handleServiceResponse(serviceResponse, res)
+        } catch (error) {
+            const errorResponse = new ServiceResponse(ResponseStatus.Failed, 'Failed to update preview', null, 500)
+            return handleServiceResponse(errorResponse, res)
+        }
+    })
+
+    // Stop Slidev preview
+    slidevRegistry.registerPath({
+        method: 'delete',
+        path: '/slidev/preview/{instanceId}',
+        tags: ['Slidev Preview'],
+        request: {
+            params: z.object({
+                instanceId: z.string()
+            })
+        },
+        responses: createApiResponse(z.boolean(), 'Preview stopped successfully'),
+    })
+
+    router.delete('/preview/:instanceId', async (req: Request, res: Response) => {
+        try {
+            const { instanceId } = req.params
+            const serviceResponse = await slidevController.stopSlidevPreview(instanceId)
+            return handleServiceResponse(serviceResponse, res)
+        } catch (error) {
+            const errorResponse = new ServiceResponse(ResponseStatus.Failed, 'Failed to stop preview', null, 500)
+            return handleServiceResponse(errorResponse, res)
+        }
+    })
+
+    // Get all preview instances
+    slidevRegistry.registerPath({
+        method: 'get',
+        path: '/slidev/preview/instances',
+        tags: ['Slidev Preview'],
+        responses: createApiResponse(z.array(PreviewInstanceSchema), 'Preview instances retrieved successfully'),
+    })
+
+    router.get('/preview/instances', async (req: Request, res: Response) => {
+        const serviceResponse = slidevController.getSlidevPreviewInstances()
+        return handleServiceResponse(serviceResponse, res)
+    })
+
+    // Get specific preview instance
+    slidevRegistry.registerPath({
+        method: 'get',
+        path: '/slidev/preview/{instanceId}',
+        tags: ['Slidev Preview'],
+        request: {
+            params: z.object({
+                instanceId: z.string()
+            })
+        },
+        responses: createApiResponse(PreviewInstanceSchema, 'Preview instance retrieved successfully'),
+    })
+
+    router.get('/preview/:instanceId', async (req: Request, res: Response) => {
+        const { instanceId } = req.params
+        const serviceResponse = slidevController.getSlidevPreviewInstance(instanceId)
+        return handleServiceResponse(serviceResponse, res)
+    })
+
     return router
 })()

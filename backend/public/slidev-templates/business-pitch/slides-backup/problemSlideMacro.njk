@@ -4,9 +4,9 @@ layout: image-right
 image: https://source.unsplash.com/800x600/problem,challenge
 ---
 
-# {{ problemTitle or 'The Problem' }}
+# {{ problemTitle if problemTitle else 'The Problem' }}
 
-{{ problemDescription or 'Describe the key problem your solution addresses. What pain points do your customers face?' }}
+{{ problemDescription if problemDescription else 'Describe the key problem your solution addresses. What pain points do your customers face?' }}
 
 <v-clicks>
 

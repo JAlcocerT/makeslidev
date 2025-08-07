@@ -5,6 +5,7 @@ import nunjucks from 'nunjucks'
 
 import { ResponseStatus, ServiceResponse } from '@/common/models/serviceResponse'
 import { IFunction, FullTemplateModel } from '../templates/template.model'
+import slidevPreviewService, { SlidevPreviewInstance, SlidevPreviewConfig } from './slidev-preview.service'
 
 // Configure Nunjucks for Slidev template rendering
 nunjucks.configure({ autoescape: false, lstripBlocks: true })
@@ -212,5 +213,118 @@ title: ${title}
                 return `${slideBreak}{{- ${block.function}(${variableArray.join(", ")}) -}}`
             })
             .join('\n')
+    }
+
+    /**
+     * Start a new Slidev preview instance
+     */
+    public async startSlidevPreview(request: CompileSlidevRequest & { config?: Partial<SlidevPreviewConfig> }): Promise<ServiceResponse<SlidevPreviewInstance | null>> {
+        try {
+            const { templateId, variables, blocks, config } = request
+
+            // First compile the template
+            const compileResult = await this.compileSlidevTemplate({ templateId, variables, blocks })
+            
+            if (compileResult.statusCode !== StatusCodes.OK || !compileResult.responseObject) {
+                return new ServiceResponse(
+                    ResponseStatus.Failed, 
+                    'Failed to compile template for preview', 
+                    null, 
+                    StatusCodes.BAD_REQUEST
+                )
+            }
+
+            // Start the preview with compiled content
+            return await slidevPreviewService.startPreview(
+                templateId, 
+                compileResult.responseObject, 
+                config
+            )
+
+        } catch (error) {
+            console.error('Error starting Slidev preview:', error)
+            return new ServiceResponse(
+                ResponseStatus.Failed, 
+                'Failed to start Slidev preview', 
+                null, 
+                StatusCodes.INTERNAL_SERVER_ERROR
+            )
+        }
+    }
+
+    /**
+     * Update an existing Slidev preview
+     */
+    public async updateSlidevPreview(instanceId: string, request: CompileSlidevRequest): Promise<ServiceResponse<boolean>> {
+        try {
+            const { templateId, variables, blocks } = request
+
+            // Compile the updated template
+            const compileResult = await this.compileSlidevTemplate({ templateId, variables, blocks })
+            
+            if (compileResult.statusCode !== StatusCodes.OK || !compileResult.responseObject) {
+                return new ServiceResponse(
+                    ResponseStatus.Failed, 
+                    'Failed to compile template for preview update', 
+                    false, 
+                    StatusCodes.BAD_REQUEST
+                )
+            }
+
+            // Update the preview with new content
+            return await slidevPreviewService.updatePreview(instanceId, compileResult.responseObject)
+
+        } catch (error) {
+            console.error('Error updating Slidev preview:', error)
+            return new ServiceResponse(
+                ResponseStatus.Failed, 
+                'Failed to update Slidev preview', 
+                false, 
+                StatusCodes.INTERNAL_SERVER_ERROR
+            )
+        }
+    }
+
+    /**
+     * Stop a Slidev preview instance
+     */
+    public async stopSlidevPreview(instanceId: string): Promise<ServiceResponse<boolean>> {
+        return await slidevPreviewService.stopPreview(instanceId)
+    }
+
+    /**
+     * Get all running preview instances
+     */
+    public getSlidevPreviewInstances(): ServiceResponse<SlidevPreviewInstance[]> {
+        const instances = slidevPreviewService.getInstances()
+        return new ServiceResponse<SlidevPreviewInstance[]>(
+            ResponseStatus.Success, 
+            'Preview instances retrieved successfully', 
+            instances, 
+            StatusCodes.OK
+        )
+    }
+
+    /**
+     * Get a specific preview instance
+     */
+    public getSlidevPreviewInstance(instanceId: string): ServiceResponse<SlidevPreviewInstance | null> {
+        const instance = slidevPreviewService.getInstance(instanceId)
+        
+        if (!instance) {
+            return new ServiceResponse(
+                ResponseStatus.Failed, 
+                'Preview instance not found', 
+                null, 
+                StatusCodes.NOT_FOUND
+            )
+        }
+
+        return new ServiceResponse<SlidevPreviewInstance>(
+            ResponseStatus.Success, 
+            'Preview instance retrieved successfully', 
+            instance, 
+            StatusCodes.OK
+        )
     }
 }

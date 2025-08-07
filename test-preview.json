@@ -1,0 +1,37 @@
+{
+  "templateId": "business-pitch",
+  "variables": {
+    "companyName": "MakeSlidev",
+    "tagline": "Create stunning presentations with ease",
+    "presenterName": "Demo User",
+    "problemTitle": "Complex Presentation Creation",
+    "problemDescription": "Creating professional presentations is time-consuming and requires design expertise"
+  },
+  "blocks": [
+    {
+      "id": "titleSlideMacro",
+      "function": "titleSlideMacro",
+      "label": "Title Slide",
+      "order": 1,
+      "variables": [
+        {"name": "companyName", "_type": "input"},
+        {"name": "tagline", "_type": "input"},
+        {"name": "presenterName", "_type": "input"}
+      ]
+    },
+    {
+      "id": "problemSlideMacro", 
+      "function": "problemSlideMacro",
+      "label": "Problem Statement",
+      "order": 2,
+      "variables": [
+        {"name": "problemTitle", "_type": "input"},
+        {"name": "problemDescription", "_type": "textarea"}
+      ]
+    }
+  ],
+  "config": {
+    "port": 3031,
+    "host": "localhost"
+  }
+}

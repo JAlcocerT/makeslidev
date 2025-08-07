@@ -1,0 +1,23 @@
+{% macro titleSlideMacro() %}
+---
+layout: cover
+background: {{ backgroundImage if backgroundImage else 'https://source.unsplash.com/1920x1080/business,office' }}
+class: text-center
+---
+
+# {{ companyName if companyName else 'Your Company' }}
+
+{{ tagline if tagline else 'Revolutionizing the future' }}
+
+<div class="pt-12">
+  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer hover:bg-white hover:bg-opacity-10">
+    {{ presenterName if presenterName else 'Presenter Name' }} <carbon:arrow-right class="inline"/>
+  </span>
+</div>
+
+<div class="abs-br m-6 flex gap-2">
+  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
+    <carbon:edit />
+  </button>
+</div>
+{% endmacro %}

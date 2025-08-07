@@ -10,6 +10,7 @@ import { sideBarRouter } from './api/sideBar/sideBar.routes'
 import { templateController } from './api/templates/template.routes'
 import { contributorController } from './api/contributors/contributor.routes'
 import { slidevRouter } from './api/slidev/slidev.routes'
+import slidevPreviewService from './api/slidev/slidev-preview.service'
 import { openAPIRouter } from './api-docs/openAPIRouter'
 import errorHandler from './common/middleware/errorHandler'
 import { PORT } from './common/utils/env'
@@ -40,5 +41,18 @@ app.use(openAPIRouter)
 
 // Error handlers
 app.use(errorHandler())
+
+// Cleanup on shutdown
+process.on('SIGINT', async () => {
+    console.log('\nReceived SIGINT. Cleaning up...')
+    await slidevPreviewService.cleanup()
+    process.exit(0)
+})
+
+process.on('SIGTERM', async () => {
+    console.log('\nReceived SIGTERM. Cleaning up...')
+    await slidevPreviewService.cleanup()
+    process.exit(0)
+})
 
 export default app

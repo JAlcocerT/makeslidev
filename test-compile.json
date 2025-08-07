@@ -1,0 +1,21 @@
+{
+  "templateId": "business-pitch",
+  "variables": {
+    "companyName": "MakeSlidev",
+    "tagline": "Create stunning presentations with ease",
+    "presenterName": "Demo User"
+  },
+  "blocks": [
+    {
+      "id": "titleSlideMacro",
+      "function": "titleSlideMacro",
+      "label": "Title Slide",
+      "order": 1,
+      "variables": [
+        {"name": "companyName", "_type": "input"},
+        {"name": "tagline", "_type": "input"},
+        {"name": "presenterName", "_type": "input"}
+      ]
+    }
+  ]
+}
