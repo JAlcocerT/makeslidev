@@ -1,0 +1,73 @@
+{% macro teamSlideMacro() %}
+---
+layout: center
+---
+
+# Our Team
+
+{{ teamDescription or 'We have assembled a world-class team with the expertise to execute on this vision.' }}
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+
+<div>
+
+## Team Members
+
+{% if teamMembers %}
+{% for member in teamMembers %}
+<v-click>
+<div class="flex items-center space-x-3 mb-3">
+  <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+  <span class="text-lg">{{ member }}</span>
+</div>
+</v-click>
+{% endfor %}
+{% else %}
+<v-click>
+<div class="flex items-center space-x-3 mb-3">
+  <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+  <span class="text-lg">CEO - 15 years industry experience</span>
+</div>
+</v-click>
+<v-click>
+<div class="flex items-center space-x-3 mb-3">
+  <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+  <span class="text-lg">CTO - Former Google engineer</span>
+</div>
+</v-click>
+<v-click>
+<div class="flex items-center space-x-3 mb-3">
+  <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+  <span class="text-lg">VP Sales - Built 3 successful sales teams</span>
+</div>
+</v-click>
+{% endif %}
+
+</div>
+
+<div>
+
+<v-click>
+
+## Why We'll Win
+
+- **Deep Industry Expertise** - Combined 50+ years experience
+- **Proven Track Record** - Previous successful exits
+- **Strong Network** - Access to customers and partners
+- **Technical Excellence** - World-class engineering team
+
+</v-click>
+
+<v-click>
+
+## Advisors & Investors
+- Industry veterans providing strategic guidance
+- Top-tier VCs backing our vision
+- Customer advisory board for product direction
+
+</v-click>
+
+</div>
+
+</div>
+{% endmacro %}

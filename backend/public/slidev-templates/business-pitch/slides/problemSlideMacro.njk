@@ -1,0 +1,36 @@
+{% macro problemSlideMacro() %}
+---
+layout: image-right
+image: https://source.unsplash.com/800x600/problem,challenge
+---
+
+# {{ problemTitle or 'The Problem' }}
+
+{{ problemDescription or 'Describe the key problem your solution addresses. What pain points do your customers face?' }}
+
+<v-clicks>
+
+{% if painPoints %}
+{% for point in painPoints %}
+- {{ point }}
+{% endfor %}
+{% else %}
+- Current solutions are inadequate
+- Customers face significant challenges
+- Market gap exists for better solution
+{% endif %}
+
+</v-clicks>
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+{% endmacro %}

@@ -1,0 +1,38 @@
+{% macro marketSizeMacro() %}
+---
+layout: two-cols
+---
+
+# Market Opportunity
+
+{{ marketDescription or 'The market opportunity is significant and growing rapidly.' }}
+
+**Target Audience:** {{ targetAudience or 'Enterprise customers and SMBs' }}
+
+<v-click>
+
+### Key Market Insights
+- Growing demand for solutions
+- Underserved market segments
+- Strong customer willingness to pay
+
+</v-click>
+
+::right::
+
+<div class="flex flex-col items-center justify-center h-full">
+  <div class="text-6xl font-bold text-blue-500 mb-4">
+    {{ marketSizeNumber or '$10B' }}
+  </div>
+  <div class="text-xl text-gray-600">
+    Total Addressable Market
+  </div>
+  
+  <v-click>
+  <div class="mt-8 p-4 bg-blue-50 rounded-lg">
+    <div class="text-2xl font-semibold text-blue-700">Projected Growth</div>
+    <div class="text-lg text-blue-600">25% CAGR over next 5 years</div>
+  </div>
+  </v-click>
+</div>
+{% endmacro %}

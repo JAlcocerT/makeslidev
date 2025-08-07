@@ -1,0 +1,44 @@
+{% macro solutionSlideMacro() %}
+---
+layout: center
+class: text-center
+---
+
+# {{ solutionTitle or 'Our Solution' }}
+
+{{ solutionDescription or 'Here\'s how we solve the problem with our innovative approach.' }}
+
+<div class="grid grid-cols-1 gap-4 pt-4 not-prose">
+
+{% if keyFeatures %}
+{% for feature in keyFeatures %}
+<v-click>
+<div class="flex items-center space-x-2">
+  <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+  <span>{{ feature }}</span>
+</div>
+</v-click>
+{% endfor %}
+{% else %}
+<v-click>
+<div class="flex items-center space-x-2">
+  <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+  <span>Innovative technology approach</span>
+</div>
+</v-click>
+<v-click>
+<div class="flex items-center space-x-2">
+  <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+  <span>User-friendly interface</span>
+</div>
+</v-click>
+<v-click>
+<div class="flex items-center space-x-2">
+  <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+  <span>Scalable and efficient</span>
+</div>
+</v-click>
+{% endif %}
+
+</div>
+{% endmacro %}

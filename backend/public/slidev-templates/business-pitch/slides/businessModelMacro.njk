@@ -1,0 +1,57 @@
+{% macro businessModelMacro() %}
+---
+layout: default
+---
+
+# Business Model
+
+<div class="grid grid-cols-2 gap-8">
+
+<div>
+
+## Revenue Model
+{{ revenueModel or 'Subscription-based SaaS model' }}
+
+<v-click>
+
+## Pricing Strategy
+{{ pricingStrategy or 'Tiered pricing based on usage and features:
+- Basic: $29/month
+- Professional: $99/month  
+- Enterprise: Custom pricing' }}
+
+</v-click>
+
+</div>
+
+<div>
+
+<v-click>
+
+## Revenue Projections
+<div class="text-3xl font-bold text-green-600 mb-2">
+  {{ revenueProjections or '$1M ARR by Year 2' }}
+</div>
+
+### Key Metrics
+- Customer Acquisition Cost: $150
+- Lifetime Value: $2,400
+- Monthly Churn Rate: <5%
+- Gross Margin: 85%
+
+</v-click>
+
+<v-click>
+
+## Growth Strategy
+- Freemium model for user acquisition
+- Enterprise sales for high-value customers
+- Partner channel development
+- International expansion
+
+</v-click>
+
+</div>
+
+</div>
+{% endmacro %}

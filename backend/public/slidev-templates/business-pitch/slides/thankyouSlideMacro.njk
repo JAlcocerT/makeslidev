@@ -1,0 +1,59 @@
+{% macro thankyouSlideMacro() %}
+---
+layout: end
+---
+
+# Thank You
+
+{{ callToAction or 'Let\'s discuss how we can work together' }}
+
+<div class="grid grid-cols-2 gap-12 mt-12">
+
+<div class="text-center">
+
+## Get In Touch
+
+<div class="space-y-4">
+  <div class="flex items-center justify-center space-x-2">
+    <carbon:email class="text-xl" />
+    <span>{{ contactEmail or 'hello@company.com' }}</span>
+  </div>
+  
+  <div class="flex items-center justify-center space-x-2">
+    <carbon:earth class="text-xl" />
+    <span>{{ website or 'www.company.com' }}</span>
+  </div>
+</div>
+
+</div>
+
+<div class="text-center">
+
+## Next Steps
+
+<v-clicks>
+
+- Schedule a follow-up meeting
+- Product demo and trial
+- Discuss partnership opportunities
+- Investment conversation
+
+</v-clicks>
+
+</div>
+
+</div>
+
+<div class="abs-br m-6 flex gap-2">
+  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
+    <carbon:edit />
+  </button>
+</div>
+
+<style>
+.slidev-layout {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+</style>
+{% endmacro %}
